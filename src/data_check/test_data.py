@@ -1,4 +1,5 @@
 import pandas as pd
+# from data_check.conftest import max_price
 import numpy as np
 import scipy.stats
 
@@ -63,3 +64,14 @@ def test_similar_neigh_distrib(data: pd.DataFrame, ref_data: pd.DataFrame, kl_th
 ########################################################
 # Implement here test_row_count and test_price_range   #
 ########################################################
+def test_row_count(data: pd.DataFrame):
+    """
+    Test that the number of rows in the dataset is greater than 15000 and less than 1,000,000.
+    """
+    assert 15000 < data.shape[0] < 1000000, f"Row count {data.shape[0]} is not within the expected range."
+
+def test_price_range(data: pd.DataFrame, min_price: float, max_price: float):
+    """
+    Test that the price values in the dataset are within min_price and max_price.
+    """
+    assert data['price'].between(min_price, max_price).all(), f"Price values are not within the range {min_price} to {max_price}."
