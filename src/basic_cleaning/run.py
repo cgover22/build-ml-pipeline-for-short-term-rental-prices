@@ -26,7 +26,15 @@ def go(args):
     df = pd.read_csv(artifact_local_path)
 
     logger.info("Filtering rows with price between %s and %s", args.min_price, args.max_price)
-    df = df[df["price"].between(args.min_price, args.max_price)].copy()
+    df = df.drop_duplicates()
+    df = df.dropna(subset=["price"])
+    df = df[df["price"].between(args.min_price, args.max_price)]
+
+    logger.info("Filtering rows with longitude between -74.25 and -73.50 and latitude between 40.5 and 41.2")
+    idx = df["longitude"].between(-74.25, -73.50) & df["latitude"].between(40.5, 41.2)
+    df = df[idx].copy()
+
+    logger.info("Cleaned dataset contains %s rows and %s columns", *df.shape)
 
     logger.info("Saving cleaned dataset to clean_sample.csv")
     df.to_csv("clean_sample.csv", index=False)
