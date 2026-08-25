@@ -592,3 +592,10 @@ Please, make sure all steps are using **the same** python version and that you h
 ## License
 
 [License](LICENSE.txt)
+
+### Weights and Biases Project URL
+https://wandb.ai/cgover8407-udacity/nyc_airbnb?nw=nwusercgover8407
+
+### Github URL 
+https://github.com/cgover22/build-ml-pipeline-for-short-term-rental-prices
+
