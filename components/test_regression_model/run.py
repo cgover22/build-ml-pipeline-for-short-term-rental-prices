@@ -4,10 +4,17 @@ This step takes the best model, tagged with the "prod" tag, and tests it against
 """
 import argparse
 import logging
+import sys
+from pathlib import Path
+
 import wandb
 import mlflow
 import pandas as pd
 from sklearn.metrics import mean_absolute_error
+
+TRAIN_RANDOM_FOREST_DIR = Path(__file__).resolve().parents[2] / "src" / "train_random_forest"
+if TRAIN_RANDOM_FOREST_DIR.exists() and str(TRAIN_RANDOM_FOREST_DIR) not in sys.path:
+    sys.path.insert(0, str(TRAIN_RANDOM_FOREST_DIR))
 
 from wandb_utils.log_artifact import log_artifact
 
